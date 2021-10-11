@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 from .models import User
 
 
@@ -36,3 +36,26 @@ def register(request):
 def login(request):
     if request.method == 'GET':
         return render(request, 'login.html')
+    elif request.method == 'POST':
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
+
+        res_data = {}
+
+        if not (username and password):
+            res_data['error'] = '모든 값을 입력해야합니다.'
+        else:
+            try:
+                user = User.objects.get(username=username)
+            except User.DoesNotExist as ex:
+                print(ex)
+                res_data['error'] = '존재하지 않는 아이디 입니다.'
+                return render(request, 'login.html', res_data)
+
+            if check_password(password, user.password):
+                pass
+
+            else:
+                res_data['error'] = '비밀번호가 틀렸습니다.'
+
+        return render(request, 'login.html', res_data)
