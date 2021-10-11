@@ -31,3 +31,8 @@ def register(request):
             user.save()
 
         return render(request, 'register.html', res_data)
+
+
+def login(request):
+    if request.method == 'GET':
+        return render(request, 'login.html')
