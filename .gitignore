@@ -1,2 +1,6 @@
 /community/venv/
 /community/.idea/
+/community/community/__pycache__/
+/community/user/__pycache__/
+/community/db.sqlite3
+/community/user/migrations/
