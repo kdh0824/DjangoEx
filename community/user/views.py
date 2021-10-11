@@ -11,6 +11,7 @@ def register(request):
         return render(request, 'register.html')
     elif request.method == 'POST':
         username = request.POST.get('username', None)
+        useremail = request.POST.get('useremail', None)
         password = request.POST.get('password', None)
         re_password = request.POST.get('re-password', None)
 
@@ -23,6 +24,7 @@ def register(request):
         else:
             user = User(
                 username=username,
+                useremail=useremail,
                 password=make_password(password)
             )
 
