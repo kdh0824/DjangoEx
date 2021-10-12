@@ -44,6 +44,31 @@ def login(request):
         form = LoginForm()
 
     return render(request, 'login.html', {'form': form})
+    # if request.method == 'GET':
+    #     return render(request, 'login.html')
+    # elif request.method == 'POST':
+    #     username = request.POST.get('username', None)
+    #     password = request.POST.get('password', None)
+    #
+    #     res_data = {}
+    #
+    #     if not (username and password):
+    #         res_data['error'] = '모든 값을 입력해야합니다.'
+    #     else:
+    #         try:
+    #             user = User.objects.get(username=username)
+    #         except User.DoesNotExist as ex:
+    #             res_data['error'] = '존재하지 않는 아이디 입니다.'
+    #             return render(request, 'login.html', res_data)
+    #
+    #         if check_password(password, user.password):
+    #             request.session['user'] = user.id
+    #             return redirect('/')
+    #             pass
+    #         else:
+    #             res_data['error'] = '비밀번호가 틀렸습니다.'
+    #
+    #     return render(request, 'login.html', res_data)
 
 
 def logout(request):
